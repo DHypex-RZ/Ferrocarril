@@ -1,11 +1,11 @@
 package maquinaria.tren;
 
 import empleado.maquinista.Maquinista;
-import estacion.Estacion;
+import estacion.IEstacion;
 import maquinaria.locomotora.Locomotora;
 import maquinaria.vagon.Vagon;
 
-public class Tren implements Estacion {
+public class Tren implements IEstacion {
     // Atributos
     private String nombre;
     private Maquinista maquinista;
@@ -27,11 +27,9 @@ public class Tren implements Estacion {
     }
 
     // Getters and Setters
-    /*
     public String getNombre() {
         return nombre;
     }
-    */
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

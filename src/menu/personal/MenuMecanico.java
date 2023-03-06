@@ -1,15 +1,15 @@
 package menu.personal;
 
 import empleado.mecanico.Mecanico;
-import estacion.Estacion;
-import menu.MenuEstacion;
+import estacion.IEstacion;
+import menu.IMenuEstacion;
 
-import static estacion.Estacion.mecanicos;
+import static estacion.IEstacion.mecanicos;
 import static util.array.Array.*;
 import static util.comprobar.Comprobar.esDiferenteS;
 import static util.pantalla.Pantalla.*;
 
-public class MenuMecanico implements MenuEstacion {
+public class MenuMecanico implements IMenuEstacion {
     @Override
     public void visualizar() {
         char c;
@@ -83,7 +83,7 @@ public class MenuMecanico implements MenuEstacion {
     }
 
     @Override
-    public Estacion darAlta() {
+    public IEstacion darAlta() {
         Mecanico mecanico = new Mecanico();
         System.out.print("Nombre: ");
         mecanico.setNombre(sc.next());

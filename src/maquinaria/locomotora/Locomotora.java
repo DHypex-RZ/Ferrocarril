@@ -1,9 +1,9 @@
 package maquinaria.locomotora;
 
 import empleado.mecanico.Mecanico;
-import estacion.Estacion;
+import estacion.IEstacion;
 
-public class Locomotora implements Estacion {
+public class Locomotora implements IEstacion {
     // Atributos
     private String matricula;
     private Mecanico mecanico;
@@ -40,11 +40,10 @@ public class Locomotora implements Estacion {
         this.mecanico = mecanico;
     }
 
-    /*
     public int getAntiguedad() {
         return antiguedad;
     }
-    */
+
 
     public void setAntiguedad(int antiguedad) {
         this.antiguedad = antiguedad;

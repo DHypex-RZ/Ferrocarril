@@ -1,9 +1,9 @@
 package empleado.mecanico;
 
 import empleado.Empleado;
-import estacion.Estacion;
+import estacion.IEstacion;
 
-public class Mecanico extends Empleado implements Estacion {
+public class Mecanico extends Empleado implements IEstacion {
     // Enumerado
     public enum Especilidad {
         MANTENIMIENTO, REPACION, ELECTRONICA, FRENOS, TRANSMISION, SIN_ESPECIALIDAD
@@ -25,11 +25,10 @@ public class Mecanico extends Empleado implements Estacion {
     }
 
     // Getters and Setters
-    /*
     public Especilidad getEspecilidad() {
         return especilidad;
     }
-    */
+
 
     public void setEspecilidad(Especilidad especilidad) {
         this.especilidad = especilidad;

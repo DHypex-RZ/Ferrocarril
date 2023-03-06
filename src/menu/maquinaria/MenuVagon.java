@@ -1,15 +1,15 @@
 package menu.maquinaria;
 
-import estacion.Estacion;
+import estacion.IEstacion;
 import maquinaria.vagon.Vagon;
-import menu.MenuEstacion;
+import menu.IMenuEstacion;
 
-import static estacion.Estacion.vagones;
+import static estacion.IEstacion.vagones;
 import static util.array.Array.*;
 import static util.comprobar.Comprobar.esDiferenteS;
 import static util.pantalla.Pantalla.*;
 
-public class MenuVagon implements MenuEstacion {
+public class MenuVagon implements IMenuEstacion {
     @Override
     public void visualizar() {
         char c;
@@ -80,7 +80,7 @@ public class MenuVagon implements MenuEstacion {
     }
 
     @Override
-    public Estacion darAlta() {
+    public IEstacion darAlta() {
         Vagon vagon = new Vagon();
 
         System.out.print("Si desea dar de alta a un vagon sin especificaciones pulsa(s): ");

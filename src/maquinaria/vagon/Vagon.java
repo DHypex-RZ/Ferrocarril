@@ -1,8 +1,8 @@
 package maquinaria.vagon;
 
-import estacion.Estacion;
+import estacion.IEstacion;
 
-public class Vagon implements Estacion {
+public class Vagon implements IEstacion {
     // Enumerados
     public enum Mercancia {
         LIQUIDO, SOLIDO, GAS, ALIMENTO, VACIO
@@ -42,11 +42,9 @@ public class Vagon implements Estacion {
         this.capacidadAct = capacidadAct;
     }
 
-    /*
     public Mercancia getTipoMercancia() {
         return tipoMercancia;
     }
-    */
 
     public void setTipoMercancia(Mercancia tipoMercancia) {
         this.tipoMercancia = tipoMercancia;

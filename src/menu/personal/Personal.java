@@ -1,10 +1,10 @@
 package menu.personal;
 
-import menu.Menu;
+import menu.IMenu;
 
 import static util.pantalla.Pantalla.*;
 
-public class Personal implements Menu {
+public class Personal implements IMenu {
     @Override
     public void visualizar() {
         char c;

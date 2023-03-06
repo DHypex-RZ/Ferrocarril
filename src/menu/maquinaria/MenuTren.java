@@ -1,20 +1,20 @@
 package menu.maquinaria;
 
 import empleado.maquinista.Maquinista;
-import estacion.Estacion;
+import estacion.IEstacion;
 import maquinaria.locomotora.Locomotora;
 import maquinaria.tren.Tren;
-import menu.MenuEstacion;
+import menu.IMenuEstacion;
 import menu.personal.MenuMaquinista;
 
-import static estacion.Estacion.*;
+import static estacion.IEstacion.*;
 import static util.array.Array.cantidad;
 import static util.array.Array.*;
 import static util.comprobar.Comprobar.esDiferenteS;
 import static util.comprobar.Comprobar.esIgualS;
 import static util.pantalla.Pantalla.*;
 
-public class MenuTren implements MenuEstacion {
+public class MenuTren implements IMenuEstacion {
     @Override
     public void visualizar() {
         char c;
@@ -118,7 +118,7 @@ public class MenuTren implements MenuEstacion {
     }
 
     @Override
-    public Estacion darAlta() {
+    public IEstacion darAlta() {
         Tren tren = new Tren();
         int n;
 

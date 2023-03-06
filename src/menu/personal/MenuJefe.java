@@ -1,15 +1,15 @@
 package menu.personal;
 
 import empleado.jefe.Jefe;
-import estacion.Estacion;
-import menu.MenuEstacion;
+import estacion.IEstacion;
+import menu.IMenuEstacion;
 
-import static estacion.Estacion.jefes;
+import static estacion.IEstacion.jefes;
 import static util.array.Array.*;
 import static util.comprobar.Comprobar.esDiferenteS;
 import static util.pantalla.Pantalla.*;
 
-public class MenuJefe implements MenuEstacion {
+public class MenuJefe implements IMenuEstacion {
     @Override
     public void visualizar() {
         char c;
@@ -83,7 +83,7 @@ public class MenuJefe implements MenuEstacion {
     }
 
     @Override
-    public Estacion darAlta() {
+    public IEstacion darAlta() {
         Jefe jefe = new Jefe();
 
         System.out.print("Nombre: ");

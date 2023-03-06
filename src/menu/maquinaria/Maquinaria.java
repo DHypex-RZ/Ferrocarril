@@ -1,10 +1,10 @@
 package menu.maquinaria;
 
-import menu.Menu;
+import menu.IMenu;
 
 import static util.pantalla.Pantalla.*;
 
-public class Maquinaria implements Menu {
+public class Maquinaria implements IMenu {
     @Override
     public void visualizar() {
         char c;

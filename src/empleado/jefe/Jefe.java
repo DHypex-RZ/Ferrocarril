@@ -1,9 +1,9 @@
 package empleado.jefe;
 
 import empleado.Empleado;
-import estacion.Estacion;
+import estacion.IEstacion;
 
-public class Jefe extends Empleado implements Estacion {
+public class Jefe extends Empleado implements IEstacion {
     // Atributos
     private double sueldo;
 

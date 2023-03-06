@@ -1,9 +1,9 @@
 package empleado.maquinista;
 
 import empleado.Empleado;
-import estacion.Estacion;
+import estacion.IEstacion;
 
-public class Maquinista extends Empleado implements Estacion {
+public class Maquinista extends Empleado implements IEstacion {
     // Enumerado
     public enum Rango {
         APRENDIZ, ASISTENTE, PRINCIPAL, JEFE, INSTRUCTOR, SIN_RANGO
@@ -25,12 +25,10 @@ public class Maquinista extends Empleado implements Estacion {
     }
 
     // Getters and Setters
-
-    /*
     public Rango getRango() {
         return rango;
     }
-    */
+
     public void setRango(Rango rango) {
         this.rango = rango;
     }

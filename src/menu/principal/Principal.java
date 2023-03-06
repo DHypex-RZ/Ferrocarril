@@ -1,12 +1,12 @@
 package menu.principal;
 
-import menu.Menu;
+import menu.IMenu;
 import menu.maquinaria.Maquinaria;
 import menu.personal.Personal;
 
 import static util.pantalla.Pantalla.*;
 
-public class Principal implements Menu {
+public class Principal implements IMenu {
     @Override
     public void visualizar() {
         char c;
