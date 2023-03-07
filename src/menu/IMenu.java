@@ -8,7 +8,4 @@ public interface IMenu {
     void visualizar();
     void escogerOpcion(char opcion);
 
-    default void salir() {
-    }
-
 }

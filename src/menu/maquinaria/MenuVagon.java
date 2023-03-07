@@ -74,7 +74,7 @@ public class MenuVagon implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> salir();
+            case '5' -> {   }
             default -> noValido();
         }
     }
@@ -93,8 +93,7 @@ public class MenuVagon implements IMenuEstacion {
                 System.out.print("Capacidad actual: ");
                 vagon.setCapacidadAct(sc.nextDouble());
             } while (vagon.getCapacidadAct() < 0 || vagon.getCapacidadAct() > vagon.getCapacidadMax());
-            System.out.println(
-                    "\"Mercancia ( VACIO, LIQUIDO, SOLIDO, GAS, ALIMENTO )\"\nMercancía: ");
+            System.out.println("Mercancia ( VACIO, LIQUIDO, SOLIDO, GAS, ALIMENTO )\nMercancía: ");
             vagon.setTipoMercancia(Vagon.Mercancia.valueOf(sc.next().toUpperCase()));
         } else {
             System.out.println("Capacidad máxima: 50.000 Kg");

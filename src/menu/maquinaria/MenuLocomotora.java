@@ -1,6 +1,5 @@
 package menu.maquinaria;
 
-import empleado.mecanico.Mecanico;
 import estacion.IEstacion;
 import maquinaria.locomotora.Locomotora;
 import menu.IMenuEstacion;
@@ -45,9 +44,7 @@ public class MenuLocomotora implements IMenuEstacion {
                             "La locomotora necesita un mecánico, para continuar debe dar de alta a un mecánico");
                     if (esIgualS(nuevaAlta())) {
                         borrar();
-                        String cad = "DAR ALTA MECÁNICO";
-                        System.out.println(cad + "\n" + "=".repeat(cad.length()) + "\n");
-                        mecanicos[cantidad(mecanicos)] = (Mecanico) new MenuMecanico().darAlta();
+                        new MenuMecanico().escogerOpcion('1');
                     } else {
                         System.out.println("No se dará de alta a la locomotora");
                         continuar();
@@ -65,12 +62,13 @@ public class MenuLocomotora implements IMenuEstacion {
 
                     locomotoras[cantidad(locomotoras)] = locomotora;
                 } else {
-                    System.out.println("No se puede dar de alta a más locomotoras");
+                    System.out.println("No se puede dar de alta a la locomotora");
                     continuar();
                 }
             }
             case '2' -> {
                 if (!vacio(locomotoras)) {
+                    mostrarInformacion(locomotoras);
                     darBaja();
                     compactar(locomotoras);
                 } else {
@@ -94,7 +92,7 @@ public class MenuLocomotora implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> salir();
+            case '5' -> {   }
             default -> noValido();
         }
     }
@@ -108,15 +106,15 @@ public class MenuLocomotora implements IMenuEstacion {
 
         do {
             do {
-                System.out.print("Seleccione el número del mecánico\nMecánico: ");
+                System.out.print("Seleccione el número del mecánico\nMecánico: "); //todo: corregir error al selecionar un mecanico cuando es creado por un tren
                 n = sc.nextInt();
-            } while (n <= 0 && n > cantidad(mecanicos));
+            } while (n <= 0 || n > cantidad(mecanicos));
             if (!mecanicos[n - 1].isOcupado()) {
                 locomotora.setMecanico(mecanicos[n - 1]);
                 locomotora.getMecanico().setOcupado(true);
+                break;
             } else {
                 System.out.println("Este maquinista ya esta ocupado con otra locomotora");
-                break;
             }
         } while (true);
         System.out.print("Matricula: ");

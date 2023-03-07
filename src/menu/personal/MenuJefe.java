@@ -53,6 +53,7 @@ public class MenuJefe implements IMenuEstacion {
             }
             case '2' -> {
                 if (!vacio(jefes)) {
+                    mostrarInformacion(jefes);
                     darBaja();
                     compactar(jefes);
                 } else {
@@ -77,7 +78,7 @@ public class MenuJefe implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> salir();
+            case '5' -> {    }
             default -> noValido();
         }
     }

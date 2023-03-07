@@ -63,11 +63,9 @@ public class Tren implements IEstacion {
         this.numeroVagones = numeroVagones;
     }
 
-    /*
     public void setVagones(Vagon[] vagones) {
         this.vagones = vagones;
     }
-    */
     // Métodos
 
     @Override

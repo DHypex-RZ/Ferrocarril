@@ -6,7 +6,7 @@ import estacion.IEstacion;
 public class Mecanico extends Empleado implements IEstacion {
     // Enumerado
     public enum Especilidad {
-        MANTENIMIENTO, REPACION, ELECTRONICA, FRENOS, TRANSMISION, SIN_ESPECIALIDAD
+        MANTENIMIENTO, REPARACION, ELECTRONICA, FRENOS, TRANSMISION, SIN_ESPECIALIDAD
     }
 
     // Atributos

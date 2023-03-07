@@ -31,7 +31,7 @@ public class Principal implements IMenu {
         switch (opcion) {
             case '1' -> new Personal().visualizar();
             case '2' -> new Maquinaria().visualizar();
-            case '3' -> salir();
+            case '3' -> {   }
             default -> noValido();
         }
     }

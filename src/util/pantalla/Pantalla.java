@@ -38,7 +38,7 @@ public class Pantalla {
     public static char confirmarCambio() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Si los datos son correctos pulsa(s) para dar cambiar la información: ");
+        System.out.print("Si los datos son correctos pulsa(s) para cambiar la información: ");
         return sc.next().charAt(0);
     }
 

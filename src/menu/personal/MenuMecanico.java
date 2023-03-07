@@ -54,6 +54,7 @@ public class MenuMecanico implements IMenuEstacion {
             }
             case '2' -> {
                 if (!vacio(mecanicos)) {
+                    mostrarInformacion(mecanicos);
                     darBaja();
                     compactar(mecanicos);
                 } else {
@@ -77,7 +78,7 @@ public class MenuMecanico implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> salir();
+            case '5' -> {            }
             default -> noValido();
         }
     }
@@ -91,7 +92,7 @@ public class MenuMecanico implements IMenuEstacion {
             System.out.print("DNI: ");
             mecanico.setDni(sc.next());
         } while (mecanico.getDni().length() > 9);
-        System.out.print("Especilidad ( MANTENIMIENTO, REPACION, ELECTRONICA, FRENOS, TRANSMISION )\nEspecialidad: ");
+        System.out.print("Especilidad ( MANTENIMIENTO, REPARACION, ELECTRONICA, FRENOS, TRANSMISION )\nEspecialidad: ");
         mecanico.setEspecilidad(Mecanico.Especilidad.valueOf(sc.next().toUpperCase()));
         return mecanico;
     }
@@ -106,14 +107,17 @@ public class MenuMecanico implements IMenuEstacion {
         } while (n < 0 || n > cantidad(mecanicos));
         if (!mecanicos[n - 1].isOcupado())
             mecanicos[n - 1] = null;
-        else
+        else {
             System.out.println("No se puede dar de baja, el mecánico esta ocupado manteniendo una locomotora");
+            continuar();
+        }
     }
 
     @Override
     public void modificar() {
         int n;
 
+        mostrarInformacion(mecanicos);
         do {
             System.out.print("Mecánico a modificar: ");
             n = sc.nextInt();

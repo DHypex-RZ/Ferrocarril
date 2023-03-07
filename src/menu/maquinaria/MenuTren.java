@@ -1,8 +1,6 @@
 package menu.maquinaria;
 
-import empleado.maquinista.Maquinista;
 import estacion.IEstacion;
-import maquinaria.locomotora.Locomotora;
 import maquinaria.tren.Tren;
 import menu.IMenuEstacion;
 import menu.personal.MenuMaquinista;
@@ -47,9 +45,7 @@ public class MenuTren implements IMenuEstacion {
                             .println("El tren necesita un maquinista, para continuar debe dar de alta a un maquinista");
                     if (esIgualS(nuevaAlta())) {
                         borrar();
-                        String cad = "DAR ALTA MAQUINISTA";
-                        System.out.println(cad + "\n" + "=".repeat(cad.length()) + "\n");
-                        maquinistas[cantidad(maquinistas)] = (Maquinista) new MenuMaquinista().darAlta();
+                        new MenuMaquinista().escogerOpcion('1');
                     } else {
                         System.out.println("No se dará de alta al tren");
                         continuar();
@@ -62,9 +58,7 @@ public class MenuTren implements IMenuEstacion {
                             "El tren necesita una locomotora, para continuar debe dar de alta a una locomotora");
                     if (esIgualS(nuevaAlta())) {
                         borrar();
-                        String cad = "DAR ALTA LOCOMOTORA";
-                        System.out.println(cad + "\n" + "=".repeat(cad.length()) + "\n");
-                        locomotoras[cantidad(locomotoras)] = (Locomotora) new MenuLocomotora().darAlta();
+                        new MenuLocomotora().escogerOpcion('1');
                     } else {
                         System.out.println("No se dará de alta al tren");
                         continuar();
@@ -72,7 +66,7 @@ public class MenuTren implements IMenuEstacion {
                     }
                 }
 
-                if (!lleno(locomotoras)) {
+                if (!lleno(locomotoras) && !vacio(maquinistas) && !vacio(locomotoras)) {
                     Tren tren;
                     do {
                         String cad = "DAR ALTA TREN";
@@ -82,12 +76,13 @@ public class MenuTren implements IMenuEstacion {
 
                     trenes[cantidad(trenes)] = tren;
                 } else {
-                    System.out.println("No se puede dar de alta a más trenes");
+                    System.out.println("No se puede dar de alta al tren");
                     continuar();
                 }
             }
             case '2' -> {
                 if (!vacio(trenes)) {
+                    mostrarInformacion(trenes);
                     darBaja();
                     compactar(trenes);
                 } else {
@@ -111,8 +106,15 @@ public class MenuTren implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> modificarVagon();
-            case '6' -> salir();
+            case '5' -> {
+                if(!vacio(vagones))
+                    modificarVagon();
+                else {
+                    System.out.println("No hay datos sobre vagones");
+                    continuar();
+                }
+            }
+            case '6' -> {   }
             default -> noValido();
         }
     }
@@ -126,18 +128,35 @@ public class MenuTren implements IMenuEstacion {
         tren.setNombre(sc.next());
         mostrarInformacion(maquinistas);
         do {
-            System.out.print("Seleccione el número del maquinista\nMaquinista: ");
-            n = sc.nextInt();
-        } while (n <= 0 && n > cantidad(maquinistas));
-        tren.setMaquinista(maquinistas[n - 1]);
-        tren.getMaquinista().setOcupado(true);
+            do {
+                System.out.print("Seleccione el número del maquinista\nMaquinista: ");
+                n = sc.nextInt();
+            } while (n <= 0 || n > cantidad(maquinistas));
+            if(!maquinistas[n - 1].isOcupado()){
+                tren.setMaquinista(maquinistas[n - 1]);
+                tren.getMaquinista().setOcupado(true);
+                break;
+            }else {
+                System.out.println("El maquinista esta ocupado con otro tren");
+            }
+        }while (true);
         mostrarInformacion(locomotoras);
         do {
-            System.out.print("Seleccione el número de locomotora\nLocomotora: ");
-            n = sc.nextInt();
-        } while (n <= 0 && n > cantidad(locomotoras));
-        tren.setLocomotora(locomotoras[n - 1]);
-        tren.getLocomotora().setReservado(true);
+            do {
+                System.out.print("Seleccione el número de locomotora\nLocomotora: ");
+                n = sc.nextInt();
+            } while (n <= 0 || n > cantidad(locomotoras));
+            if(!locomotoras[n-1].isReservado()){
+                tren.setLocomotora(locomotoras[n - 1]);
+                tren.getLocomotora().setReservado(true);
+                break;
+            }else {
+                System.out.println("La locomotora esta montada en otro tren");
+            }
+        }while (true);
+
+
+
         do {
             System.out.print("Cantidad de vagones (0 - 5): ");
             tren.setNumeroVagones(sc.nextInt());
@@ -149,19 +168,19 @@ public class MenuTren implements IMenuEstacion {
             if (esIgualS(sc.next().charAt(0))) {
                 char car;
 
-                mostrarInformacion(vagones);
                 do {
+                    mostrarInformacion(vagones);
                     do {
                         System.out.print("Selecciona el número del vagon\nVagon: ");
                         n = sc.nextInt();
-                    } while (n <= 0 && n > cantidad(vagones));
+                    } while (n <= 0 || n > cantidad(vagones));
                     if (vagones[n - 1].isReservado() || cantidad(tren.getVagones()) == tren.getNumeroVagones())
                         System.out.println("No se puede añadir el vagón");
                     else {
-                        tren.getVagones()[cantidad(tren.getVagones()) - 1] = vagones[n - 1];
-                        tren.getVagones()[cantidad(tren.getVagones()) - 1].setReservado(true);
+                        tren.getVagones()[cantidad(tren.getVagones())] = vagones[n - 1];
+                        tren.getVagones()[cantidad(tren.getVagones())-1].setReservado(true);
                     }
-                    System.out.println("Si desea añadir más vagones pulsa(s): ");
+                    System.out.print("Si desea añadir más vagones pulsa(s): ");
                     car = sc.next().charAt(0);
                 } while (cantidad(tren.getVagones()) < tren.getNumeroVagones() || esDiferenteS(car));
             } else
@@ -196,6 +215,7 @@ public class MenuTren implements IMenuEstacion {
         System.out.println(trenes[n - 1]);
         System.out.println(trenes[n - 1] + "\n" + "=".repeat(10));
         trenes[n - 1].getMaquinista().setOcupado(false);
+        trenes[n-1].getLocomotora().setReservado(false);
         for (int i = 0; i < trenes[n - 1].getNumeroVagones(); i++)
             if (trenes[n - 1].getVagones()[i] != null)
                 trenes[n - 1].getVagones()[i].setReservado(false);
@@ -207,12 +227,13 @@ public class MenuTren implements IMenuEstacion {
         char car;
 
         do {
+            mostrarInformacion(trenes);
             do {
                 System.out.print("Tren ha modificar: ");
-                e = sc.nextInt();
+                e = sc.nextInt() - 1;
             } while (e < 0 || e > cantidad(trenes));
 
-            if (trenes[e - 1].getNumeroVagones() == 0) {
+            if (trenes[e].getNumeroVagones() == 0) {
                 System.out.println("No se pueden añadir ni quitar vagones, ya que solo el tren solo admite 0 vagones");
                 break;
             }
@@ -220,38 +241,42 @@ public class MenuTren implements IMenuEstacion {
             System.out.print("¿Que desea hacer? añadir/quitar vagones (a/q): ");
             car = sc.next().charAt(0);
             if (car == 'a' || car == 'A') {
-                if (cantidad(trenes[e - 1].getVagones()) < trenes[e - 1].getNumeroVagones()) {
-                    mostrarInformacion(vagones);
+                if (cantidad(trenes[e].getVagones()) < trenes[e].getNumeroVagones()) {
                     do {
+                        mostrarInformacion(vagones);
                         do {
                             System.out.print("Selecciona el número del vagon\nVagon: ");
                             n = sc.nextInt();
                         } while (n <= 0 && n > cantidad(vagones));
-                        if (vagones[n - 1].isReservado() || cantidad(trenes) == trenes[e - 1].getNumeroVagones())
+                        if (vagones[n - 1].isReservado() || cantidad(trenes) == trenes[e].getNumeroVagones())
                             System.out.println("No se puede añadir el vagón");
                         else {
-                            trenes[e - 1].getVagones()[cantidad(trenes[e - 1].getVagones()) - 1] = vagones[n - 1];
-                            trenes[e - 1].getVagones()[cantidad(trenes[e - 1].getVagones()) - 1].setReservado(true);
+                            trenes[e].getVagones()[cantidad(trenes[e].getVagones())] = vagones[n - 1];
+                            trenes[e].getVagones()[cantidad(trenes[e].getVagones()) - 1].setReservado(true);
                         }
-                        System.out.println("Si desea añadir más vagones pulsa(s): ");
+                        System.out.print("Si desea añadir más vagones pulsa(s): ");
                         car = sc.next().charAt(0);
-                    } while (cantidad(trenes[e - 1].getVagones()) < trenes[e - 1].getNumeroVagones()
-                            || esDiferenteS(car));
+                    } while (cantidad(trenes[e].getVagones()) < trenes[e].getNumeroVagones() && esIgualS(car));
                 } else
                     System.out.println("No puedes añadir más vagones");
             } else if (car == 'q' || car == 'Q') {
-                do {
-                    mostrarInformacion(trenes[e - 1].getVagones());
+                if(!vacio(trenes[e].getVagones())){
                     do {
-                        System.out.print("Selecciona el número del vagon\nVagon: ");
-                        n = sc.nextInt();
-                    } while (n <= 0 && n > cantidad(trenes[e - 1].getVagones()));
-                    trenes[e - 1].getVagones()[n - 1].setReservado(false);
-                    trenes[e - 1].getVagones()[n - 1] = null;
-                    compactar(trenes[e - 1].getVagones());
-                    System.out.println("Si desea quitar más vagones pulsa(s): ");
-                    car = sc.next().charAt(0);
-                } while (cantidad(trenes[e - 1].getVagones()) >= 0 || esDiferenteS(car));
+                        mostrarInformacion(trenes[e].getVagones());
+                        do {
+                            System.out.print("Selecciona el número del vagon\nVagon: ");
+                            n = sc.nextInt();
+                        } while (n <= 0 && n > cantidad(trenes[e].getVagones()));
+                        trenes[e].getVagones()[n - 1].setReservado(false);
+                        trenes[e].getVagones()[n - 1] = null;
+                        compactar(trenes[e].getVagones());
+                        System.out.print("Si desea quitar más vagones pulsa(s): ");
+                        car = sc.next().charAt(0);
+                    } while (cantidad(trenes[e].getVagones()) > 0 || esDiferenteS(car));
+                }else{
+                    System.out.println("No hay vagones");
+                    continuar();
+                }
             } else {
                 noValido();
                 break;

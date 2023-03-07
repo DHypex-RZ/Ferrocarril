@@ -52,6 +52,7 @@ public class MenuMaquinista implements IMenuEstacion {
             }
             case '2' -> {
                 if (!vacio(maquinistas)) {
+                    mostrarInformacion(maquinistas);
                     darBaja();
                     compactar(maquinistas);
                 } else {
@@ -75,7 +76,7 @@ public class MenuMaquinista implements IMenuEstacion {
                     continuar();
                 }
             }
-            case '5' -> salir();
+            case '5' -> {      }
             default -> noValido();
         }
     }
@@ -105,8 +106,11 @@ public class MenuMaquinista implements IMenuEstacion {
         } while (n < 0 || n > cantidad(maquinistas));
         if (!maquinistas[n - 1].isOcupado())
             maquinistas[n - 1] = null;
-        else
+        else{
             System.out.println("No se puede dar de baja, el maquinista esta ocupado conduciendo un tren");
+            continuar();
+        }
+
     }
 
     @Override

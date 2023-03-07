@@ -31,7 +31,7 @@ public class Maquinaria implements IMenu {
             case '1' -> new MenuTren().visualizar();
             case '2' -> new MenuLocomotora().visualizar();
             case '3' -> new MenuVagon().visualizar();
-            case '4' -> salir();
+            case '4' -> {   }
             default -> noValido();
         }
     }

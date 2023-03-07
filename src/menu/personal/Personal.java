@@ -31,7 +31,7 @@ public class Personal implements IMenu {
             case '1' -> new MenuJefe().visualizar();
             case '2' -> new MenuMaquinista().visualizar();
             case '3' -> new MenuMecanico().visualizar();
-            case '4' -> salir();
+            case '4' -> {}
             default -> noValido();
         }
     }
